@@ -11,6 +11,7 @@ var tools   = require('./paintings');
 var router = express();
 var server = http.createServer(router);
 var io = socketio.listen(server);
+var postImpressionists = 'post-impressionists.json';
 var paul = 'Paul Cézanne';
 //var vincent = 'Vincent Van Gogh';
 var artist = paul;
@@ -123,6 +124,11 @@ router.get('/scrape2',
 	    });
 	}
 )
+
+router.get('/post-impressionists', function (request, response) {
+	console.log('list called');
+	response.sendFile('post-impressionists.json');
+})
 
 router.get('/list', function (request, response) {
 	console.log('list called');
