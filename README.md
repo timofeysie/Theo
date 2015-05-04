@@ -236,6 +236,44 @@ TypeError: Object #<ServerResponse> has no method 'sendFile'
 ...Pronab+> can you try 'sendfile'  in the code in server.js line 60 ?
 
 
+## Other Artists
+
+Some artists do not have thier own list of paintings page, such as Odilon Redon.  Here is a sample of one of the images on his page:
+<li class="gallerybox" 
+	style="width: 175px">
+	<div style="width: 175px">
+		<div class="thumb" 
+			style="width: 170px;">
+			<div style="margin:15px auto;">
+				<a href="/wiki/File:Redon_spirit-waters.jpg" class="image">
+					<img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/6/69/Redon_spirit-waters.jpg/113px-Redon_spirit-waters.jpg" width="113" height="140" 
+					srcset="//upload.wikimedia.org/wikipedia/commons/thumb/6/69/Redon_spirit-waters.jpg/170px-Redon_spirit-waters.jpg 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/6/69/Redon_spirit-waters.jpg/226px-Redon_spirit-waters.jpg 2x" 
+					data-file-width="831" data-file-height="1028">
+				</a>
+			</div>
+		</div>
+		<div class="gallerytext">
+			<p>"Guardian Spirit of the Waters", 1878</p>
+		</div>
+	</div>
+</li>
+
+The result of running it through our current scrape2 method was this:
+[
+  {
+    "size": "",
+    "title": "Wikimedia Commons has media related to Odilon Redon.",
+    "date": "\n\n\n\n\n\nv\nt\ne\n\n\nPost-Impressionism\n\n\n\n\n\n\n19th-century\nmovements\n\n\n\nNeo-impressionism\nDivisionism\nPointillism\nCloisonnism\nLes Nabis\nSynthetism\nSymbolism\nArt Nouveau\n\n\n\n\n\n\n\n\nArtists\n\n\n\nCharles Angrand\nÉmile Bernard\nPaul Cézanne\nPaul Gauguin\nHippolyte Petitjean\nOdilon Redon\nHenri Rousseau\nGeorges Seurat\nPaul Signac\nHenri de Toulouse-Lautrec\nGeorges Lemmen\nMaximilien Luce\nPaul Ranson\nVincent van Gogh\nThéo van Rysselberghe\nRené Schützenberger\nFélix Vallotton\nÉdouard Vuillard\n\n\n\n\n\n\n\n\n20th-century\nmovements\n\n\n\nFauvism\nDie Brücke\nDer Blaue Reiter\nExpressionism\nCubism\n\n\n\n\n\n\n\n\nArtists\n\n\n\nHenri Matisse\nAndré Derain\nAlbert Gleizes\nErnst Ludwig Kirchner\nKarl Schmidt-Rottluff\nWassily Kandinsky\nFranz Marc\nJean Metzinger\nFrancis Picabia\nPablo Picasso\nRobert Antoine Pinchon\nGeorges Braque\n\n\n\n\n\n\n\n\nExhibitions\n\n\n\nArtistes Indépendants\nLes XX\nVolpini Exhibition\nLe Barc de Boutteville\nLa Libre Esthétique\nAmbroise Vollard\nSalon d'Automne\nSalon des Indépendants\nSalon des Cent\n\n\n\n\n\n\n\n\nCritics\n\n\n\nFélix Fénéon\nAlbert Aurier\n\n\n\n\n\n\n\n\nSee also\n\n\n\nImpressionism\nModernism\nModern art\nSecessionism\n\n\n\n\n\n"
+  },
+  {
+    "size": "Date of birth",
+    "title": "Short description",
+    "date": "French painter and printmaker",
+    "thumb": "http:undefined"
+  }
+]
+
+
 
 ## The Chat Code
 

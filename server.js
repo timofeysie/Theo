@@ -13,16 +13,25 @@ var server = http.createServer(router);
 var io = socketio.listen(server);
 var postImpressionists = 'post-impressionists.json';
 var paul = 'Paul Cézanne';
+var paulsUrl = 'http://en.wikipedia.org/wiki/List_of_paintings_by_Paul_C%C3%A9zanne';
 //var vincent = 'Vincent Van Gogh';
-var artist = paul;
+//var vincentsUrl = 'http://en.wikipedia.org/wiki/List_of_works_by_Vincent_van_Gogh';
+//var odilon = "Odilon Redon";
+//var odilonUrl = "http://en.wikipedia.org/wiki/Odilon_Redon";
+//var artist = paul;
 //var artist = vincent;
+//var gauguinsUrl = 'http://en.wikipedia.org/wiki/List_of_paintings_by_Paul_Gauguin';
+var artistUrl = paulsUrl;
+var artist = paul;
 var sections = artist.split(' ');
-var filename = sections[0].toLowerCase();
+//var filename = sections[0].toLowerCase(); // first name
+var filename = sections[sections.length-1].toLowerCase(); // use last name as file
 console.log('writing file for '+filename);
 router.use(express.static(path.resolve(__dirname, 'client')));
 var messages = [];
 var sockets = [];
 
+// not used
 router.get('/scrape', function(req, res){
 	url = 'http://en.wikipedia.org/wiki/List_of_works_by_Vincent_van_Gogh';
 	request(url, function(error, response, html){ 	
@@ -47,10 +56,7 @@ router.get('/scrape', function(req, res){
 
 router.get('/scrape2', 
 	function(req, res) {
-		//vincentsUrl = 'http://en.wikipedia.org/wiki/List_of_works_by_Vincent_van_Gogh';
-	  paulsUrl = 'http://en.wikipedia.org/wiki/List_of_paintings_by_Paul_C%C3%A9zanne';
-		request(paulsUrl, function(error, response, html) { 
-		//request(vincentsUrl, function(error, response, html) {   
+		request(artistUrl, function(error, response, html) {   
 		    var addedCount = 0;
 		    var fullCount = 0;
 			if (!error) {
@@ -108,7 +114,7 @@ router.get('/scrape2',
 	  		} else {
 				  console.log('There was an error'); 
 	      }
-	        fs.writeFile(filename+'.json', JSON.stringify(paintings, null, 4), function(err) {
+	        fs.writeFile('data/'+filename+'.json', JSON.stringify(paintings, null, 4), function(err) {
 	        console.log('number of paintings :'+fullCount);
 	        console.log('number added        :'+addedCount);
         })
@@ -121,21 +127,8 @@ router.get('/post-impressionists', function (request, response) {
 	response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   response.setHeader('Content-Type', 'application/json');
-  var file = fs.readFileSync('post-impressionists.json');
+  var file = fs.readFileSync('data/post-impressionists.json');
 	response.send(file);
-})
-
-router.get('/list', function (request, response) {
-	console.log('list called');
-	response.send('vincent.json');
-})
-
-router.get('/vincent', function (request, response) {
-  response.header("Access-Control-Allow-Origin", "*");
-  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  response.setHeader('Content-Type', 'application/json');
-  var file = fs.readFileSync('paul.json');
-  response.send(file);
 })
 
 // Enable CORS
@@ -152,7 +145,7 @@ router.get('/post-impressionist/:painter', function (request, response) {
   response.setHeader('Content-Type', 'application/json');
   var painter = request.params.painter;
   console.log('painter '+painter);
-  var file = fs.readFileSync(painter+'.json');
+  var file = fs.readFileSync('data/'+painter+'.json');
   response.send(file);
 })
 
