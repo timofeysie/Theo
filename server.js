@@ -18,7 +18,7 @@ var artist = paul;
 //var artist = vincent;
 var sections = artist.split(' ');
 var filename = sections[0].toLowerCase();
-
+console.log('writing file for '+filename);
 router.use(express.static(path.resolve(__dirname, 'client')));
 var messages = [];
 var sockets = [];
@@ -48,11 +48,11 @@ router.get('/scrape', function(req, res){
 router.get('/scrape2', 
 	function(req, res) {
 		//vincentsUrl = 'http://en.wikipedia.org/wiki/List_of_works_by_Vincent_van_Gogh';
-		paulsUrl = 'http://en.wikipedia.org/wiki/List_of_paintings_by_Paul_C%C3%A9zanne';
-		request(paulsUrl, function(error, response, html) { 	
+	  paulsUrl = 'http://en.wikipedia.org/wiki/List_of_paintings_by_Paul_C%C3%A9zanne';
+		request(paulsUrl, function(error, response, html) { 
+		//request(vincentsUrl, function(error, response, html) {   
 		    var addedCount = 0;
 		    var fullCount = 0;
-		    console.log('Start parse');
 			if (!error) {
 				var $ = cheerio.load(html);
 				var paintings = [];
@@ -86,12 +86,6 @@ router.get('/scrape2',
 					    	painting.thumb = thumb;
 					    	painting.image = image;
 					    	paintings.push(painting);
-
-					        //console.log('size '+size+'---------'+objectMark);
-					    	//console.log('title '+title);
-					    	//console.log('date '+date);
-					    	//console.log('thumb '+thumb);
-					    	//console.log('image '+image);
 					        objectMark++;
 					    	break;
 					    case 4:
@@ -102,7 +96,6 @@ router.get('/scrape2',
 					    default:
 					    	break;
 					}	
-					//cmust be an image tag
 					if (text == '' || text == undefined || text == null) {
 					    addedCount++;
 						painting.thumb = td.children('a').children('img').attr('src');
@@ -113,26 +106,28 @@ router.get('/scrape2',
 					}
 				});
 	  		} else {
-				console.log('There was an error'); 
-	        }
+				  console.log('There was an error'); 
+	      }
 	        fs.writeFile(filename+'.json', JSON.stringify(paintings, null, 4), function(err) {
-	        	console.log('File successfully written.');
-	        	console.log('number of paintings :'+fullCount);
-	        	console.log('number added        :'+addedCount);
-        	})
-        	res.send(paintings);
+	        console.log('number of paintings :'+fullCount);
+	        console.log('number added        :'+addedCount);
+        })
+        res.send(paintings);
 	    });
-	}
+	  }
 )
 
 router.get('/post-impressionists', function (request, response) {
-	console.log('list called');
-	response.sendFile('post-impressionists.json');
+	response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  response.setHeader('Content-Type', 'application/json');
+  var file = fs.readFileSync('post-impressionists.json');
+	response.send(file);
 })
 
 router.get('/list', function (request, response) {
 	console.log('list called');
-	response.sendFile('vincent.json');
+	response.send('vincent.json');
 })
 
 router.get('/vincent', function (request, response) {
@@ -142,6 +137,7 @@ router.get('/vincent', function (request, response) {
   var file = fs.readFileSync('paul.json');
   response.send(file);
 })
+
 // Enable CORS
 router.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -149,6 +145,18 @@ router.use(function(req, res, next) {
   next();
 });
 
+// take a request for a particular painter
+router.get('/post-impressionist/:painter', function (request, response) {
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  response.setHeader('Content-Type', 'application/json');
+  var painter = request.params.painter;
+  console.log('painter '+painter);
+  var file = fs.readFileSync(painter+'.json');
+  response.send(file);
+})
+
+// Chat Functions
 io.on('connection', function (socket) {
     messages.forEach(function (data) {
       socket.emit('message', data);

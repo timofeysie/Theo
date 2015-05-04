@@ -11,19 +11,15 @@ These pages are separated by artists by name, so we could have to assemble a lis
 
 ## WIP
 
-We have an Angular Material front end for this service which shows our list of paintings by Vincent Van Gogh and Paul Cézanne.
+Using Cheeio to parse the Wikidata we get a map fo the table rows and look at each row which goes in order of thumb url, title, size, location and nation, give or take a few of these.
+Currently we get the following results for Vincent:
+number of paintings :3672
+number added        :922
+And for Paul:
+number of paintings :1133
+number added        :205
 
-Currently, the chat app is broken after tyring to add Material Design app to the Cloud9 account.  Creating another AngularJS app to house the Angular client also has failed due to memory restrictuons.
-
-The basic Node.js scraping function is working, which provieds the lists to the game client, either a website or a hybrid mobile app.
-You can delete the vincent.json file and then go to:
-https://ebor-timofeysie.c9.io/scrape
-And the list of paintings with titles and urls will be recreated.
-Change vincent to use paulsUrl and set the artist as paul to generate his json file.
-
-
-## TODO
-Change the way artists are chosen, for example, make a loop to go theurough each Post Impressionist and generate files for all of them as well as a meta file which lists the artists name, dates, and filename (which is their first name, lowercase, with the json file type attached).
+Not perfect, but given that loading times are a problem, this issue should be handled with pagination or some such mechanism.
 
 
 ## The AngularJS APP (Not working)
@@ -72,6 +68,8 @@ path should be: /wiki ???
 https://ebor-timofeysie.c9.io/ 
 https://ebor-timofeysie.c9.io/scrape  Scrape the web page and save a file.
 https://ebor-timofeysie.c9.io/list    Show the list of paintings and links.
+https://ebor-timofeysie.c9.io/post-impressionists/vincent
+
 
 ## Parsing Wikidata
 

@@ -1,8 +1,7 @@
 var cheerio = require('cheerio');
 module.exports = {
-
+	/* Old method which started with the src element*/
 	getPainting: function(i, element, img) {
-		//console.log('i '+i);
 		var url = img.attr('src');
 		if ((url.indexOf('//upload') != -1) && (url.indexOf('.jpg') != -1)) {
 			var title = img.attr('alt');
@@ -21,9 +20,6 @@ module.exports = {
 			}
 			title = title.replace(/[_0-9]+$/, '');
 			var date = img.parent().next().next().first().text();
-			
-			//console.log(i+' date '+date);
-			// get Large Url
 			var thumb = url.indexOf('/thumb/');
 			var separ   = url.indexOf('/100px-');
 			if (separ == -1) {
@@ -35,7 +31,6 @@ module.exports = {
 			var base = url.slice(0, thumb);
 			var name = url.slice(thumb+6,separ);
 			var largeUrl = 'http:'+base+name;
-			//console.log('largeUrl '+largeUrl);
 			var painting = {}
 			painting.title = title;
 			painting.url = 'http:'+url;
@@ -43,15 +38,12 @@ module.exports = {
 		}
 		return painting;
 	},
+	/* Starting with the url for the thumb, we floolow the steps in the README to get the full sized image url.*/
 	getImage: function(url) {
 		if (url) {
-			// get Large Url
 			var thumb = url.indexOf('/thumb/');
 			var base = url.slice(0, thumb);
 			var name = url.slice(url.indexOf('/thumb/')+6,url.indexOf('.jpg')+4);
-			console.log('length '+url.length);
-			console.log('base:'+base);
-			console.log('name:'+name);
 			var image = 'http:'+base+name;
 		}
 		return image;
