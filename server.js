@@ -133,7 +133,7 @@ router.get('/vincent', function (request, response) {
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   response.setHeader('Content-Type', 'application/json');
-  var file = fs.readFileSync('vincent.json');
+  var file = fs.readFileSync('paul.json');
   response.send(file);
 })
 // Enable CORS
