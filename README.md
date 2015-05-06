@@ -274,6 +274,31 @@ The result of running it through our current scrape2 method was this:
 ]
 
 
+A painting by Paul Gauguin is on the list of paintings by him, but fails to get a large image:
+
+src="
+//upload.wikimedia.org/wikipedia/commons
+/thumb/0/09/
+Paul_Gauguin-_Manao_tupapau_%28The_Spirit_of_the_Dead_Keep_Watch%29.JPG
+/100px-Paul_Gauguin-_Manao_tupapau_%28The_Spirit_of_the_Dead_Keep_Watch%29.JPG" 
+
+Full sized image:
+http://upload.wikimedia.org/wikipedia/commons/
+0/09/Paul_Gauguin-_Manao_tupapau_%28The_Spirit_of_the_Dead_Keep_Watch%29.JPG
+
+Former notes:
+Full sized url:
+http://upload.wikimedia.org/wikipedia/commons
+/1/1e/
+Still_Life_with_Cabbage_and_Clogs.jpg
+
+Thumb url:
+http://upload.wikimedia.org/wikipedia/commons
+/thumb/1/1e/
+Still_Life_with_Cabbage_and_Clogs.jpg
+/100px-Still_Life_with_Cabbage_and_Clogs.jpg
+
+
 
 ## The Chat Code
 
