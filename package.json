@@ -14,6 +14,8 @@
   },
   "devDependencies": {
     "connect-livereload": "^0.5.3",
+    "gulp-develop-server": "^0.4.2",
+    "jshint": "^2.7.0",
     "tiny-lr": "^0.1.5"
   }
 }
