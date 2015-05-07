@@ -38,7 +38,8 @@ module.exports = {
 		}
 		return painting;
 	},
-	/* Starting with the url for the thumb, we floolow the steps in the README to get the full sized image url.*/
+	/* Starting with the url for the thumb, we flollow the steps described in the README 
+	titled 'Turning a thumb into a full sized image' to get the full sized image url.*/
 	getImage: function(url) {
 		if (url) {
 			var thumb = url.indexOf('/thumb/');

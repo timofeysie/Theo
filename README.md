@@ -1,5 +1,36 @@
 ### Ebor is the name of the tree in front of my house
 
+## To do:
+* Make the gulpfile live reload task work so that we don't have to stop and start the server to see changes.
+* create some tests to run that confirm the errors that are happening in the scrape method:
+https://ebor-timofeysie.c9.io/scrape
+
+A sample problem image:
+size Palais des Beaux-Arts de Lille, Lille, France (F822) problem image! --------
+title Cows (after Jordaens)
+date 1890
+thumb http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Van_Gogh_-_K%C3%BChe_%28nach_Jordaens%29.jpeg/100px-Van_Gogh_-_K%C3%BChe_%28nach_Jordaens%29.jpeg
+
+The html:
+<tr>
+	<td>
+		<a href="/wiki/File:Van_Gogh_-_K%C3%BChe_(nach_Jordaens).jpeg" 
+			class="image">
+			<img alt="Van Gogh - Kühe (nach Jordaens).jpeg" 
+				src="//upload.wikimedia.org/wikipedia/commons/thumb/4/47/Van_Gogh_-_K%C3%BChe_%28nach_Jordaens%29.jpeg/100px-Van_Gogh_-_K%C3%BChe_%28nach_Jordaens%29.jpeg" 
+				width="100" height="80" 
+				srcset="//upload.wikimedia.org/wikipedia/commons/thumb/4/47/Van_Gogh_-_K%C3%BChe_%28nach_Jordaens%29.jpeg/150px-Van_Gogh_-_K%C3%BChe_%28nach_Jordaens%29.jpeg 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/4/47/Van_Gogh_-_K%C3%BChe_%28nach_Jordaens%29.jpeg/200px-Van_Gogh_-_K%C3%BChe_%28nach_Jordaens%29.jpeg 2x" 
+				data-file-width="3876" data-file-height="3102"></a></td>
+	<td>
+		<i>
+			<a href="/wiki/Copies_by_Vincent_van_Gogh#Copy_after_Jacob_Jordaens" title="Copies by Vincent van Gogh">Cows (after Jordaens)</a>
+		</i></td>
+	<td>1890</td>
+	<td>
+		<a href="/wiki/Palais_des_Beaux-Arts_de_Lille" 
+			title="Palais des Beaux-Arts de Lille">Palais des Beaux-Arts de Lille</a>, Lille, France (F822)</td>
+</tr>
+
 ## The Game
 
 Brief: an art game where a team of players must guess the artist who painted a picture.
@@ -174,7 +205,7 @@ What we want to get out of it:
 </tr>
 
 
-## Turning a thumb into a full sized image:
+## Turning a thumb into a full sized image
 
 If we have a URL, we can compare that to a link to the full sized image:
 http://upload.wikimedia.org/wikipedia/commons/1/1e/Still_Life_with_Cabbage_and_Clogs.jpg

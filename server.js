@@ -11,50 +11,27 @@ var tools   = require('./paintings');
 var router = express();
 var server = http.createServer(router);
 var io = socketio.listen(server);
+// artist information, the lists are curretnly generated one at a time
 var postImpressionists = 'post-impressionists.json';
-var paul = 'Paul Cézanne';
-var paulsUrl = 'http://en.wikipedia.org/wiki/List_of_paintings_by_Paul_C%C3%A9zanne';
-//var vincent = 'Vincent Van Gogh';
-//var vincentsUrl = 'http://en.wikipedia.org/wiki/List_of_works_by_Vincent_van_Gogh';
+//var paul = 'Paul Cézanne';
+//var paulsUrl = 'http://en.wikipedia.org/wiki/List_of_paintings_by_Paul_C%C3%A9zanne';
+var vincent = 'Vincent Van Gogh';
+var vincentsUrl = 'http://en.wikipedia.org/wiki/List_of_works_by_Vincent_van_Gogh';
 //var odilon = "Odilon Redon";
 //var odilonUrl = "http://en.wikipedia.org/wiki/Odilon_Redon";
 //var artist = paul;
 //var artist = vincent;
 //var gauguinsUrl = 'http://en.wikipedia.org/wiki/List_of_paintings_by_Paul_Gauguin';
-var artistUrl = paulsUrl;
-var artist = paul;
+var artistUrl = vincentsUrl;
+var artist = vincent; // the filename in the data dir will be the last name of the string set here
 var sections = artist.split(' ');
-//var filename = sections[0].toLowerCase(); // first name
-var filename = sections[sections.length-1].toLowerCase(); // use last name as file
+var filename = sections[sections.length-1].toLowerCase(); // get the last name as file
 console.log('writing file for '+filename);
 router.use(express.static(path.resolve(__dirname, 'client')));
 var messages = [];
 var sockets = [];
 
-// not used
-router.get('/scrape', function(req, res){
-	url = 'http://en.wikipedia.org/wiki/List_of_works_by_Vincent_van_Gogh';
-	request(url, function(error, response, html){ 	
-	  // url and callback retuning parameters w html
-		if (!error){
-			var $ = cheerio.load(html);
-			var paintings = [];
-			 // we need to match <td> <a <img src=*** thumb url ***
-			$('img').each(function(i, element) {
-        painting = tools.getPainting(i, element, $(this));
-      	if (painting) { 
-	      	paintings.push(painting);
-	    }
-    	});
-		}
-		fs.writeFile('vincent.json', JSON.stringify(paintings, null, 4), function(err){
-        	console.log('File successfully written in output.json file');
-        })
-        res.send('Check your console!')
-	})
-});
-
-router.get('/scrape2', 
+router.get('/scrape', 
 	function(req, res) {
 		request(artistUrl, function(error, response, html) {   
 		    var addedCount = 0;
@@ -91,6 +68,13 @@ router.get('/scrape2',
 					    	painting.date = date;
 					    	painting.thumb = thumb;
 					    	painting.image = image;
+					    	if (image == "http://upload.wikimedia.org/wikipedia/commons") {
+					    		console.log('size '+painting.size+' problem image! --------');
+					    		console.log('title '+painting.title);
+					    		console.log('date '+painting.date);
+					    		console.log('thumb '+painting.thumb);
+					    		console.log('image '+painting.image);
+					    	}
 					    	paintings.push(painting);
 					        objectMark++;
 					    	break;
@@ -149,7 +133,7 @@ router.get('/post-impressionist/:painter', function (request, response) {
   response.send(file);
 })
 
-// Chat Functions
+// Chat Functions /////////////////////
 io.on('connection', function (socket) {
     messages.forEach(function (data) {
       socket.emit('message', data);
