@@ -32,7 +32,6 @@ function notifyLivereload(event) {
   });
 }
 
-
 gulp.task('default', function () {
   startExpress();
   startLivereload();
