@@ -2,7 +2,7 @@
 var http = require('http');
 var path = require('path');
 var async = require('async');
-var socketio = require('socket.io'); 
+var socketio = require('socket.io');
 var express = require('express');
 var fs = require('fs');
 var request = require('request');
@@ -39,9 +39,61 @@ router.get('/scrape',
 			if (!error) {
 				var $ = cheerio.load(html);
 				var paintings = [];
+				var objectMark = 0;
+				var size;
+					var thumb;
+					var image;
+					var date;
+					var title;
 				$('td').map(function(i, td) {
-					var painting = tools.scrapePainting(i, td, $);
-					paintings.push(painting);
+					fullCount++;
+					var painting = {}
+					
+					td = $(td)
+					var text = td.text();
+					switch(objectMark) {
+					    case 1:
+					        painting.title = text;
+					        title = text;
+					        objectMark++;
+					        break;
+					    case 2:
+					        painting.date = text;
+					        date = text;
+					        objectMark++;
+					        break;
+					    case 3:
+					    	painting.size = text;
+					    	painting.title = title;
+					    	painting.date = date;
+					    	painting.thumb = thumb;
+					    	painting.image = image;
+					    	if (image == "http://upload.wikimedia.org/wikipedia/commons") {
+					    		console.log('size '+painting.size+' problem image! --------');
+					    		console.log('title '+painting.title);
+					    		console.log('date '+painting.date);
+					    		console.log('thumb '+painting.thumb);
+					    		console.log('image '+painting.image);
+					    	}
+					    	paintings.push(painting);
+					        objectMark++;
+					    	break;
+					    case 4:
+					        objectMark++;
+					    case 5:
+					        objectMark = 0;
+					    	break;
+					    default:
+					    	break;
+					}	
+					if (text == '' || text == undefined || text == null) {
+					    addedCount++;
+						painting.thumb = td.children('a').children('img').attr('src');
+						painting.image = tools.getImage(painting.thumb);
+						thumb = 'http:'+painting.thumb;
+						image = painting.image;
+						objectMark++;
+					}
 				});
 	  		} else {
 				  console.log('There was an error'); 
@@ -54,22 +106,6 @@ router.get('/scrape',
 	    });
 	  }
 )
-
-router.get('/scrape/test', function (request, response) {
-	response.header("Access-Control-Allow-Origin", "*");
-  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  response.setHeader('Content-Type', 'application/json');
-  var file = fs.readFileSync('data/test.json');
-	response.send(file);
-})
-
-router.get('/post-impressionists', function (request, response) {
-	response.header("Access-Control-Allow-Origin", "*");
-  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  response.setHeader('Content-Type', 'application/json');
-  var file = fs.readFileSync('data/post-impressionists.json');
-	response.send(file);
-})
 
 // Enable CORS
 router.use(function(req, res, next) {
