@@ -40,7 +40,7 @@ router.get('/scrape',
 				var $ = cheerio.load(html);
 				var paintings = [];
 				$('td').map(function(i, td) {
-					var painting = tools.scrapePainting(i, td);
+					var painting = tools.scrapePainting(i, td, $);
 					paintings.push(painting);
 				});
 	  		} else {

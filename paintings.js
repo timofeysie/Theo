@@ -49,7 +49,8 @@ module.exports = {
 		}
 		return image;
 	},
-	scrapePainting: function(i, td) {
+	scrapePainting: function(i, td, $) {
+		console.log('scrapePainting:'+i+' '+td+' '+$);
 		var objectMark = 0;
 		var size;
 		var thumb;
@@ -95,12 +96,12 @@ module.exports = {
 		    	break;
 		}	
 		if (text == '' || text == undefined || text == null) {
-		    addedCount++;
+		    //addedCount++;
 			painting.thumb = td.children('a').children('img').attr('src');
-			painting.image = tools.getImage(painting.thumb);
+			painting.image = this.getImage(painting.thumb);
 			thumb = 'http:'+painting.thumb;
 			image = painting.image;
-			objectMark++;
+			//objectMark++;
 		}
 	}
 

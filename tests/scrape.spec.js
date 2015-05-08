@@ -2,7 +2,7 @@ describe('scrape test',function(){
 
 var request = require('request');
 
-it("should respond with hello world", function(done) {
+it("should respond to a call to /scrape", function(done) {
   request("http://localhost:3000/scrape", 
   	function(error, response, body) {
     	expect(body).toBeDefined();
