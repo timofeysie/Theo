@@ -40,6 +40,18 @@ Initially, we can start with one game, Painters:
 http://en.wikipedia.org/wiki/List_of_painters_by_name
 These pages are separated by artists by name, so we could have to assemble a list by hand using Cheerio or with the WikiMedia API using nodemw
 
+
+# Tests
+
+We are using the Jasmin Node
+Integration of Jasmine Spec framework with Node.js by Miško Hevery (founder of AnulgarJS no less).
+[Jasmin Node](https://github.com/mhevery/jasmine-node)
+Test can be run with from the root directory:
+```
+$ jasmine-node tests/
+```
+
+
 ## WIP
 
 Using Cheeio to parse the Wikidata we get a map fo the table rows and look at each row which goes in order of thumb url, title, size, location and nation, give or take a few of these.
