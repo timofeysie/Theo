@@ -45,10 +45,12 @@ module.exports = {
 			var thumb = url.indexOf('/thumb/');
 			var base = url.slice(0, thumb);
 			var jpg = url.indexOf('.jpg');
+			var ext = 4;
 			if (jpg == -1) {
-				jpg = url.indexOf('.jpeg');
+				jpg = url.indexOf('.jpeg'); // look out for jpeg file endings also
+				ext = 5;
 			}
-			var name = url.slice(url.indexOf('/thumb/')+6,jpg+4);
+			var name = url.slice(url.indexOf('/thumb/')+6,jpg+ext);
 			var image = 'http:'+base+name;
 		}
 		return image;

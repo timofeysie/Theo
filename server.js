@@ -107,6 +107,35 @@ router.get('/scrape',
 	  }
 )
 
+router.get('/post-impressionists', function (request, response) {
+	response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  response.setHeader('Content-Type', 'application/json');
+  var file = fs.readFileSync('data/post-impressionists.json');
+	response.send(file);
+})
+
+router.get('/play', function (request, response) {
+	response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  response.setHeader('Content-Type', 'application/json');
+  var file = fs.readFileSync('data/post-impressionists.json');
+  var paintersObj = JSON.parse(file);
+  var painterChosen = Math.floor((Math.random() * paintersObj.length));
+  var painter = paintersObj[painterChosen].title;
+  var sections = painter.split(' ');
+  var filename = sections[sections.length-1].toLowerCase(); // get the last name as file
+  var paintingsFile = fs.readFileSync('data/'+filename+'.json');
+  var paintingsObj = JSON.parse(paintingsFile);
+  var paintingChosen = Math.floor((Math.random() * paintingsObj.length));
+  var painting = paintingsObj[paintingChosen].title;
+	var gameObj = [];
+	gameObj.push(paintersObj[painterChosen]);
+	gameObj.push(paintingsObj[paintingChosen]);
+  console.log('painter '+painterChosen+' painting '+paintingChosen);
+	response.send(gameObj);
+})
+
 // Enable CORS
 router.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
