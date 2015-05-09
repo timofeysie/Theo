@@ -129,9 +129,16 @@ router.get('/play', function (request, response) {
   var paintingsObj = JSON.parse(paintingsFile);
   var paintingChosen = Math.floor((Math.random() * paintingsObj.length));
   var painting = paintingsObj[paintingChosen].title;
+  var painters = [];
+  for (var i = 0; i < paintersObj.length; i++) {
+  	var painterName = {};
+  	painterName.title = paintersObj[i].title;
+  	painters.push(painterName);
+  }
 	var gameObj = [];
-	gameObj.push(paintersObj[painterChosen]);
-	gameObj.push(paintingsObj[paintingChosen]);
+	gameObj.push(painters); // the list of all possible painters
+	gameObj.push(paintersObj[painterChosen]); // the painter chose
+	gameObj.push(paintingsObj[paintingChosen]); // the painting chosen
   console.log('painter '+painterChosen+' painting '+paintingChosen);
 	response.send(gameObj);
 })
