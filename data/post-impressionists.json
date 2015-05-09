@@ -19,5 +19,19 @@
         "date": "1853–1890",
         "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Vincent_van_Gogh_1866.jpg/150px-Vincent_van_Gogh_1866.jpg",
         "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Vincent_van_Gogh_1866.jpg/150px-Vincent_van_Gogh_1866.jpg"
+    },
+    {
+        "size": "One of the first 19th-century artists to paint modern life, and a pivotal figure in the transition from Realism to Impressionism.",
+        "title": "Édouard Manet",
+        "date": "1832-1883",
+        "thumb": "http://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/%C3%89douard_Manet-crop.jpg/220px-%C3%89douard_Manet-crop.jpg",
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/%C3%89douard_Manet-crop.jpg/220px-%C3%89douard_Manet-crop.jpg"
+    },
+    {
+        "size": "An American painter and printmaker. She was born in Pennsylvania, but lived much of her adult life in France, where she first befriended Edgar Degas and later exhibited among the Impressionists.",
+        "title": "Mary Cassatt",
+        "date": "1844-1926",
+        "thumb": "http://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Mary_Cassatt_-_Portrait_of_the_Artist_-_MMA_1975.319.1.jpg/220px-Mary_Cassatt_-_Portrait_of_the_Artist_-_MMA_1975.319.1.jpg",
+        "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Mary_Cassatt_-_Portrait_of_the_Artist_-_MMA_1975.319.1.jpg/220px-Mary_Cassatt_-_Portrait_of_the_Artist_-_MMA_1975.319.1.jpg"
     }
 ]
