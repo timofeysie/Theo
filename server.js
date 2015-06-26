@@ -126,7 +126,7 @@ router.get('/post-impressionists', function (request, response) {
 
 router.get('/play', function (request, response) {
 	response.header("Access-Control-Allow-Origin", "*");
-	 response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	response.setHeader('Content-Type', 'application/json');
 	var file = fs.readFileSync('data/post-impressionists.json');
 	var paintersObj = JSON.parse(file);
